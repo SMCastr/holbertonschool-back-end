@@ -7,7 +7,6 @@ returns information about his/her TODO list progress.
 import requests
 from sys import argv
 
-
 if __name__ == "__main__":
 
     if len(argv) != 2:
@@ -24,19 +23,18 @@ if __name__ == "__main__":
 
         todos = response.json()
 
-        employee_name = todos[0]["username"]
+        if todos:
+            employee_name = todos[0]["username"]
 
-        total_tasks = len(todos)
-        completed_tasks = sum(1 for todo in todos if todo["completed"])
+            total_tasks = len(todos)
+            completed_tasks = sum(1 for todo in todos if todo["completed"])
 
+            print("Employee {} is done with tasks ({}/{}):".format(
+                employee_name, completed_tasks, total_tasks))
 
-        print("Employee {} is done with tasks({}/{}):".format(
-            employee_name, completed_tasks, total_tasks))
-
-
-        for todo in todos:
-            if todo["completed"]:
+            for todo in todos:
                 print("\t {}".format(todo["title"]))
+        else:
+            print("Employee with ID {} not found.".format(employee_id))
     else:
         print("Error: Unable to fetch data from API")
-        
