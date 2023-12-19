@@ -25,15 +25,11 @@ if __name__ == "__main__":
 
         username = todos[0]["username"]
 
-
         csv_filename = "{}.csv".format(employee_id)
-
 
         with open(csv_filename, "w", newline="") as csvfile:
 
             csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-
-
             csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
             for todo in todos:
