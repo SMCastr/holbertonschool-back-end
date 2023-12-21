@@ -8,7 +8,6 @@ import requests
 from sys import argv
 
 if __name__ == "__main__":
-
     if len(argv) != 2:
         print("Usage: {} employee_id".format(argv[0]))
         exit()
@@ -20,9 +19,7 @@ if __name__ == "__main__":
     response = requests.get(url)
 
     if response.status_code == 200:
-
         todos = response.json()
-
         username = todos[0]["username"]
 
         json_filename = "{}.json".format(employee_id)

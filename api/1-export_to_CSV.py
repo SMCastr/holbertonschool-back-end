@@ -2,11 +2,28 @@
 """
 Python script that, using a REST API, exports data in CSV format
 for tasks owned by a given employee.
+Requirements:
+    Records all tasks that are owned by this employee
+    Format must be: "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
+    File name must be: USER_ID.csv
+    You must use the REST API:
+        https://jsonplaceholder.typicode.com/todos
+        https://jsonplaceholder.typicode.com/users
+    You must use the module requests and sys
+    You must export all data in the CSV file
+    You must NOT use the module pandas
+    The script must be executable by using the following command:
+        ./1-export_to_CSV.py <employee_id>
 """
 
+
+import json as json
+from collections import OrderedDict
+from sys import argv
 import csv
 import requests
-from sys import argv
+
+
 
 
 if __name__ == "__main__":
@@ -28,8 +45,7 @@ if __name__ == "__main__":
         csv_filename = "{}.csv".format(employee_id)
 
         with open(csv_filename, "w", newline="") as csvfile:
-
-            csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+            csv_writer = csv.writer(csvfile)
             csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
             for todo in todos:
