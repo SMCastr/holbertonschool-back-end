@@ -5,7 +5,8 @@ Export data in the JSON format
 Records all tasks that are owned by this employee
     Format must be: { "USER_ID": [ {"task": "TASK_TITLE", "completed":
     TASK_COMPLETED_STATUS, "username": "USERNAME"}}, {"task":
-    "TASK_TITLE", "completed": TASK_COMPLETED_STATUS, "username": "USERNAME"}}, ... ]}
+    "TASK_TITLE", "completed": TASK_COMPLETED_STATUS,
+    "username": "USERNAME"}}, ... ]}
     File name must be: USER_ID.json
 You must use the REST API:
     https://jsonplaceholder.typicode.com/todos
@@ -32,7 +33,8 @@ if __name__ == "__main__":
         user_id = str(user.get("id"))
         username = user.get("username")
 
-        tasks = requests.get(base_url + "todos", params={"userId": user_id}).json()
+        tasks = requests.get(base_url + "todos",
+                             params={"userId": user_id}).json()
 
         task_list = []
         for task in tasks:
