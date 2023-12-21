@@ -1,14 +1,9 @@
-#!/usr/bin/env python3
-"""
-Python script that, using a REST API, for a given employee ID,
-returns information about his/her TODO list progress.
-"""
-
 import requests
 from sys import argv
 
+
 def gather_data_from_api(employee_id):
-    user_url = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     user_response = requests.get(user_url)
     user_data = user_response.json()
 
@@ -18,7 +13,7 @@ def gather_data_from_api(employee_id):
             print("Error: Unable to fetch employee name.")
             return
 
-        todo_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
+        todo_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
         todo_response = requests.get(todo_url)
 
         if todo_response.status_code == 200:
@@ -28,23 +23,22 @@ def gather_data_from_api(employee_id):
                 total_tasks = len(todos)
                 completed_tasks = sum(1 for todo in todos if todo["completed"])
 
-                print("Employee {} is done with tasks ({}/{}):".format(
-                    employee_name, completed_tasks, total_tasks))
+                print(f"Employee {employee_name} is done with tasks ({completed_tasks}/{total_tasks}):")
 
-                for idx, todo in enumerate(todos, start=1):
-                    task_status = "OK" if todo["completed"] else "Not OK"
-                    print("\t {}. {} ({})".format(idx, todo["title"], task_status))
+                for todo in todos:
+                    if todo["completed"]:
+                        print(f"\t{todo['title']}")
             else:
-                print("Employee {} has no tasks.".format(employee_name))
+                print(f"Employee {employee_name} has no tasks.")
         else:
             print("Error: Unable to fetch TODO list data from API")
     else:
         print("Error: Unable to fetch user data from API")
 
-if __name__ == "__main__":
-    if len(argv) != 2 or not argv[1].isdigit():
-        print("Usage: {} employee_id".format(argv[0]))
-        exit()
 
-    employee_id = int(argv[1])
-    gather_data_from_api(employee_id)
+if __name__ == "__main__":
+    if len(argv) != 2:
+        print(f"Usage: {argv[0]} employee_id")
+    else:
+        employee_id = argv[1]
+        gather_data_from_api(employee_id)
