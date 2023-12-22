@@ -24,7 +24,6 @@ from sys import argv
 import requests
 
 
-
 if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: {} employee_id".format(argv[0]))
@@ -61,5 +60,6 @@ if __name__ == "__main__":
         print("Number of tasks: {}".format(len(todos)))  # Add number of tasks in CSV
         print("User ID: {}".format(employee_id))  # Retrieve user ID
         print("Username: {}".format(username))  # Retrieve username
+        print("Data retrieved from API: {}".format(url))  # Retrieve data from API
     else:
         print("Error: Unable to fetch data from API")
