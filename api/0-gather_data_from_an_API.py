@@ -1,10 +1,4 @@
 #!/usr/bin/python3
-import requests
-from collections import OrderedDict
-from sys import argv
-from typing import Dict, List
-
-
 """
 Python script that, using a REST API, for a given employee ID,
 returns information about "his/her" (Todo) list progress.
@@ -32,6 +26,13 @@ format:
 The script must be executable by using the following command:
     ./0-gather_data_from_an_API.py <employee_id>
 """
+
+
+import requests
+from collections import OrderedDict
+from sys import argv
+from typing import Dict, List
+import requests
 
 
 def get_employee_data(employee_id: str) -> Dict[str, str]:
