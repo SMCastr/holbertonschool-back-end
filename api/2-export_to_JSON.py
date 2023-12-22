@@ -11,24 +11,21 @@ Format must be: { "USER_ID": [ {"task": "TASK_TITLE",
                 "username": USERNAME},
                 {"task": "TASK_TITLE",
                 "completed": TASK_COMPLETED_STATUS,
-                "username": USERNAME}, ... ]}                      
+                "username": USERNAME}, ... ]}
 """
 
 import json
 import requests
 from sys import argv
+from collections import OrderedDict
 from typing import List, Dict
 
 
 def export_to_json(employee_id: str) -> None:
     """
     Exports tasks owned by a given employee to JSON format.
-
-    Args:
-        employee_id (str): The ID of the employee.
-
-    Returns:
-        None
+    Args: employee_id (str): The ID of the employee.
+    Returns:None
     """
     url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
 
@@ -40,8 +37,14 @@ def export_to_json(employee_id: str) -> None:
 
         json_filename = "{}.json".format(employee_id)
 
-        tasks_list = [{"task": todo["title"], "completed": todo["completed"],
-                       "username": username} for todo in todos]
+        tasks_list = []
+        for todo in todos:
+            task_dict = {
+                "task": todo["title"],
+                "completed": todo["completed"],
+                "username": username
+            }
+            tasks_list.append(task_dict)
 
         data_dict = {employee_id: tasks_list}
 
