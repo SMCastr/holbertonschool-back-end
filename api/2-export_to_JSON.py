@@ -66,7 +66,7 @@ def export_to_json(employee_id: List[Dict[str, str]]) -> None:
                 employee_done_tasks.append(task)
                 print("\t {}".format(task.get('title')))
         print("\n")
-        
+
 if __name__ == "__main__":
     api_url = "https://jsonplaceholder.typicode.com/users"
     response = requests.get(api_url).json()
@@ -76,4 +76,3 @@ if __name__ == "__main__":
         employee_id.append({"id": user.get('id'), "name": user.get('name')})
 
     export_to_json(employee_id)
-
