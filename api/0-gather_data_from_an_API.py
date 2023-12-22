@@ -35,7 +35,6 @@ from typing import Dict, List
 import requests
 
 
-
 if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: {} employee_id".format(argv[0]))
