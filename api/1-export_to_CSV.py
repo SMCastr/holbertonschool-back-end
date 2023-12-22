@@ -23,7 +23,6 @@ import json
 from sys import argv
 import requests
 
-
 if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: {} employee_id".format(argv[0]))
@@ -38,13 +37,18 @@ if __name__ == "__main__":
     if response.status_code == 200:
         todos = response.json()
 
+        if len(todos) == 0:
+            print("No tasks found for employee with ID {}".format(employee_id))
+            exit()
+
         username = todos[0]["username"]
 
         csv_filename = "{}.csv".format(employee_id)
 
         with open(csv_filename, "w", newline="") as csvfile:
             csv_writer = csv.writer(csvfile)
-            csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+            csv_writer.writerow(["USER_ID", "USERNAME",
+                                 "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
             for todo in todos:
                 task_completed = str(todo["completed"])
