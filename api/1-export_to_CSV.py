@@ -17,11 +17,11 @@ Requirements:
 """
 
 
-import json as json
 import csv
 from collections import OrderedDict
-import requests
+import json
 from sys import argv
+import requests
 
 
 if __name__ == "__main__":
