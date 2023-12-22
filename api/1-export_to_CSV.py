@@ -57,3 +57,4 @@ if __name__ == "__main__":
         print("CSV file '{}' created successfully.".format(csv_filename))
     else:
         print("Error: Unable to fetch data from API")
+
