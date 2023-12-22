@@ -28,7 +28,6 @@ The script must be executable by using the following command:
 """
 
 
-import json
 import requests
 from collections import OrderedDict
 from sys import argv
