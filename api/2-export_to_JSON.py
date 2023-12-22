@@ -56,3 +56,24 @@ def export_to_json(employee_id: List[Dict[str, str]]) -> None:
             json.dump(data_dict, jsonfile)
 
         print("JSON file '{}' created successfully.".format(json_filename))
+        print("Number of tasks: {}".format(len(tasks_list)))
+        print("Employee {} is done with tasks({}/{}):".format(employee_name,
+                                                              len(tasks_list),
+                                                              len(response)))
+        employee_done_tasks = []
+        for task in tasks_list:
+            if task.get('completed') is True:
+                employee_done_tasks.append(task)
+                print("\t {}".format(task.get('title')))
+        print("\n")
+        
+if __name__ == "__main__":
+    api_url = "https://jsonplaceholder.typicode.com/users"
+    response = requests.get(api_url).json()
+
+    employee_id = []
+    for user in response:
+        employee_id.append({"id": user.get('id'), "name": user.get('name')})
+
+    export_to_json(employee_id)
+
