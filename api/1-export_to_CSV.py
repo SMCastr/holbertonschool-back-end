@@ -60,5 +60,6 @@ if __name__ == "__main__":
         print("Number of tasks: {}".format(len(todos)))  # Add number of tasks in CSV
         print("User ID: {}".format(employee_id))  # Retrieve user ID
         print("Username: {}".format(username))  # Retrieve username
+        print("Number of tasks in CSV: {}".format(len(todos)))  # Correct number of tasks in CSV
     else:
         print("Error: Unable to fetch data from API")
