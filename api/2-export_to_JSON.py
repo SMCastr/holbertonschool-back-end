@@ -1,19 +1,24 @@
 #!/usr/bin/python3
 """
-Python script that, using a REST API, exports data in JSON format for tasks owned by a given employee.
+Python script that, using a REST API, exports data in JSON format
+for tasks owned by a given employee.
+
+Requirements: Records all tasks that are owned by this employee
+and exports to JSON.
+
+Format must be: { "USER_ID": [ {"task": "TASK_TITLE",
+                "completed": TASK_COMPLETED_STATUS,
+                "username": USERNAME},
+                {"task": "TASK_TITLE",
+                "completed": TASK_COMPLETED_STATUS,
+                "username": USERNAME}, ... ]}                       
 """
 
 import json
 import requests
 from sys import argv
-
-if __name__ == "__main__":
-    if len(argv) != 2:
-        print("Usage: {} employee_id".format(argv[0]))
-        exit()
-
-    employee_id = argv[1]
-
+from typing import List, Dict
+def export_to_json(employee_id: str) -> None:
     url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
 
     response = requests.get(url)
@@ -34,3 +39,11 @@ if __name__ == "__main__":
         print("JSON file '{}' created successfully.".format(json_filename))
     else:
         print("Error: Unable to fetch data from API")
+
+if __name__ == "__main__":
+    if len(argv) != 2:
+        print("Usage: {} employee_id".format(argv[0]))
+        exit()
+
+    employee_id = argv[1]
+    export_to_json(employee_id)
