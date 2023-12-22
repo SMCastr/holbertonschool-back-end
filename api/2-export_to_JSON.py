@@ -55,6 +55,13 @@ def export_to_json(employee_id: str) -> None:
     else:
         print("Error: Unable to fetch data from API")
 
+# User ID's value is a list of dicts
+employee_id = [{"id": 1, "name": "John"}, {"id": 2, "name": "Jane"}]
+
+# All tasks found in list of dicts
+tasks = [{"task": "Task 1", "completed": True}, {"task": "Task 2", "completed": False}]
+
+
 if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: {} employee_id".format(argv[0]))
