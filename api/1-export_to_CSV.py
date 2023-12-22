@@ -18,12 +18,10 @@ Requirements:
 
 
 import json as json
-from collections import OrderedDict
-from sys import argv
 import csv
+from collections import OrderedDict
 import requests
-
-
+from sys import argv
 
 
 if __name__ == "__main__":
@@ -57,4 +55,3 @@ if __name__ == "__main__":
         print("CSV file '{}' created successfully.".format(csv_filename))
     else:
         print("Error: Unable to fetch data from API")
-

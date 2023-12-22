@@ -9,14 +9,15 @@ Requirements:
     employee ID
     The script must display on the standard output the employee (Todo) 
     list progress in this exact format:
-        First line:
-        Employee EMPLOYEE_NAME is done with tasks(NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
-            EMPLOYEE_NAME: name of the employee
-            NUMBER_OF_DONE_TASKS: number of completed tasks
-            TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the
-            sum of completed and non-completed tasks
-        Second and N next lines display the title of completed tasks:
-            TASK_TITLE: title of the task
+    First line:
+    Employee EMPLOYEE_NAME is done with task
+    (NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
+        EMPLOYEE_NAME: name of the employee
+        NUMBER_OF_DONE_TASKS: number of completed tasks
+        TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the
+        sum of completed and non-completed tasks
+    Second and N next lines display the title of completed tasks:
+        TASK_TITLE: title of the task
     Tasks must be sorted by completed status (completed last) and then
     by the task id (ascending)
     You must use the REST API:
