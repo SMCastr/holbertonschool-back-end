@@ -7,11 +7,8 @@ Requirements: Records all tasks that are owned by this employee
 and exports to JSON.
 
 Format must be: { "USER_ID": [{"task": "TASK_TITLE",
-                "completed": TASK_COMPLETED_STATUS,
-                "username": USERNAME},
-                {"task": "TASK_TITLE",
-                "completed": TASK_COMPLETED_STATUS,
-                "username": USERNAME}, ... ]}
+            "completed": TASK_COMPLETED_STATUS,
+            "username": USERNAME}, ...]}
 """
 
 import json
