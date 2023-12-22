@@ -70,5 +70,7 @@ if __name__ == "__main__":
         print("Usage: {} employee_id".format(argv[0]))
         exit()
 
-    employee_id = argv[1]
+    # Ensure employee_id is a list of dicts
+    employee_id = [employee_id] if isinstance(employee_id, dict) else employee_id
+
     export_to_json(employee_id)
