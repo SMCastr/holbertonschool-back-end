@@ -3,9 +3,7 @@
 Python script that, using a REST API, for a given employee ID,
 returns information about "his/her" (Todo) list progress.
 Requirements:
-The script must accept an integer as a parameter, which is the
-employee ID
-The script must display on the standard output the employee (Todo) 
+The script must display on the standard output the employee (Todo)
 list progress in this exact format:
 First line:
 Employee EMPLOYEE_NAME is done with task
@@ -35,6 +33,7 @@ from collections import OrderedDict
 from sys import argv
 from typing import Dict, List
 import requests
+
 
 
 if __name__ == "__main__":
