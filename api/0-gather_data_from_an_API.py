@@ -32,6 +32,7 @@ import requests
 from collections import OrderedDict
 from sys import argv
 from typing import Dict, List
+import requests
 
 
 def get_employee_data(employee_id: str) -> Dict[str, str]:
