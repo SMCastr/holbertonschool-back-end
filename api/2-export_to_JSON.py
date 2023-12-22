@@ -24,8 +24,10 @@ from typing import List, Dict
 def export_to_json(employee_id: List[Dict[str, str]]) -> None:
     """
     Exports tasks owned by a given employee to JSON format.
-    Args: employee_id (List[Dict[str, str]]): The list of employee IDs and names.
-    Returns: None
+    Args:
+        employee_id (List[Dict[str, str]]): The list of employee IDs and names.
+    Returns:
+        None
     """
     for employee in employee_id:
         employee_id = employee["id"]
@@ -59,18 +61,13 @@ def export_to_json(employee_id: List[Dict[str, str]]) -> None:
             print("Error: Unable to fetch data from API")
 
 # User ID's value is a list of dicts
-employee_id = [{"id": 1, "name": "John"}, {"id": 2, "name": "Jane"}]
+employee_id: List[Dict[str, str]] = [{"id": 1, "name": "John"}, {"id": 2, "name": "Jane"}]
 
 # All tasks found in list of dicts
 tasks = [{"task": "Task 1", "completed": True}, {"task": "Task 2", "completed": False}]
 
+# Ensure employee_id is a list of dicts
+if isinstance(employee_id, dict):
+    employee_id = [employee_id]
 
-if __name__ == "__main__":
-    if len(argv) != 2:
-        print("Usage: {} employee_id".format(argv[0]))
-        exit()
-
-    # Ensure employee_id is a list of dicts
-    employee_id = [employee_id] if isinstance(employee_id, dict) else employee_id
-
-    export_to_json(employee_id)
+export_to_json(employee_id)
