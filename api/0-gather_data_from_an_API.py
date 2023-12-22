@@ -32,6 +32,7 @@ from sys import argv
 from typing import List, Dict
 from collections import OrderedDict
 
+
 def gather_data_from_api(employee_id: str) -> None:
     user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     user_response = requests.get(user_url)
