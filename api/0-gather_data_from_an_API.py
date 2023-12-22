@@ -29,10 +29,10 @@ The script must be executable by using the following command:
 
 
 import json
-import requests
 from collections import OrderedDict
 from sys import argv
 from typing import Dict, List
+import requests
 
 
 if __name__ == "__main__":
