@@ -23,6 +23,7 @@ import json
 from sys import argv
 import requests
 
+
 if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: {} employee_id".format(argv[0]))
@@ -47,8 +48,7 @@ if __name__ == "__main__":
 
         with open(csv_filename, "w", newline="") as csvfile:
             csv_writer = csv.writer(csvfile)
-            csv_writer.writerow(["USER_ID", "USERNAME",
-                                 "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+            csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
             for todo in todos:
                 task_completed = str(todo["completed"])
@@ -57,5 +57,8 @@ if __name__ == "__main__":
                 csv_writer.writerow([employee_id, username, task_completed, task_title])
 
         print("CSV file '{}' created successfully.".format(csv_filename))
+        print("Number of tasks: {}".format(len(todos)))  # Add number of tasks in CSV
+        print("User ID: {}".format(employee_id))  # Retrieve user ID
+        print("Username: {}".format(username))  # Retrieve username
     else:
         print("Error: Unable to fetch data from API")
