@@ -6,8 +6,7 @@ Requirements:
 The script must display on the standard output the employee (Todo)
 list progress in this exact format:
 First line:
-Employee EMPLOYEE_NAME is done with task
-(NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
+Employee EMPLOYEE_NAME is done with tasks (NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
     EMPLOYEE_NAME: name of the employee
     NUMBER_OF_DONE_TASKS: number of completed tasks
     TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the
@@ -29,19 +28,12 @@ The script must be executable by using the following command:
 
 
 import requests
-from collections import OrderedDict
 from sys import argv
-from typing import Dict, List
+from typing import List, Dict
+from collections import OrderedDict
 
-
-if __name__ == "__main__":
-    if len(argv) != 2:
-        print("Usage: {} employee_id".format(argv[0]))
-        exit()
-
-    employee_id = argv[1]
-
-    user_url = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
+def gather_data_from_api(employee_id: str) -> None:
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     user_response = requests.get(user_url)
     user_data = user_response.json()
 
@@ -49,13 +41,13 @@ if __name__ == "__main__":
         employee_name = user_data.get("name", "")
         if not employee_name:
             print("Error: Unable to fetch employee name.")
-            exit()
+            return
 
-        todo_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
+        todo_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
         todo_response = requests.get(todo_url)
 
         if todo_response.status_code == 200:
-            todos = todo_response.json()
+            todos = sorted(todo_response.json(), key=lambda x: (x["completed"], x["id"]))
 
             if todos:
                 total_tasks = len(todos)
@@ -65,11 +57,18 @@ if __name__ == "__main__":
                     employee_name, completed_tasks, total_tasks))
 
                 for idx, todo in enumerate(todos, start=1):
-                    if todo["completed"]:
-                        print("\t {}. {}".format(idx, todo["title"]))
+                    print("\t {}. [{}] {}".format(idx, "OK" if todo["completed"] else "Not OK", todo["title"]))
             else:
                 print("Employee {} has no tasks.".format(employee_name))
         else:
             print("Error: Unable to fetch TODO list data from API")
     else:
         print("Error: Unable to fetch user data from API")
+
+if __name__ == "__main__":
+    if len(argv) != 2:
+        print("Usage: {} employee_id".format(argv[0]))
+        exit()
+
+    employee_id = argv[1]
+    gather_data_from_api(employee_id)
