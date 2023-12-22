@@ -34,13 +34,7 @@ from sys import argv
 from typing import Dict, List
 
 
-if __name__ == "__main__":
-    if len(argv) != 2:
-        print("Usage: {} employee_id".format(argv[0]))
-        exit()
-
-    employee_id = argv[1]
-
+def get_employee_data(employee_id: str) -> Dict[str, str]:
     user_url = "https://jsonplaceholder.typicode.com/users/{}".format(employee_id)
     user_response = requests.get(user_url)
     user_data = user_response.json()
@@ -50,26 +44,46 @@ if __name__ == "__main__":
         if not employee_name:
             print("Error: Unable to fetch employee name.")
             exit()
-
-        todo_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
-        todo_response = requests.get(todo_url)
-
-        if todo_response.status_code == 200:
-            todos = todo_response.json()
-
-            if todos:
-                total_tasks = len(todos)
-                completed_tasks = sum(1 for todo in todos if todo["completed"])
-
-                print("Employee {} is done with tasks ({}/{}):".format(
-                    employee_name, completed_tasks, total_tasks))
-
-                for idx, todo in enumerate(todos, start=1):
-                    if todo["completed"]:
-                        print("\t {}. {}".format(idx, todo["title"]))
-            else:
-                print("Employee {} has no tasks.".format(employee_name))
-        else:
-            print("Error: Unable to fetch TODO list data from API")
+        return {"name": employee_name}
     else:
         print("Error: Unable to fetch user data from API")
+        exit()
+
+
+def get_todo_data(employee_id: str) -> List[Dict[str, str]]:
+    todo_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
+    todo_response = requests.get(todo_url)
+
+    if todo_response.status_code == 200:
+        todos = todo_response.json()
+        return todos
+    else:
+        print("Error: Unable to fetch TODO list data from API")
+        exit()
+
+
+def display_employee_progress(employee_data: Dict[str, str], todo_data: List[Dict[str, str]]) -> None:
+    employee_name = employee_data["name"]
+    total_tasks = len(todo_data)
+    completed_tasks = sum(1 for todo in todo_data if todo["completed"])
+
+    print("Employee {} is done with tasks ({}/{}):".format(
+        employee_name, completed_tasks, total_tasks))
+
+    sorted_todos = sorted(todo_data, key=lambda x: (x["completed"], x["id"]))
+    for idx, todo in enumerate(sorted_todos, start=1):
+        if todo["completed"]:
+            print("\t {}. {}".format(idx, todo["title"]))
+
+
+if __name__ == "__main__":
+    if len(argv) != 2:
+        print("Usage: {} employee_id".format(argv[0]))
+        exit()
+
+    employee_id = argv[1]
+
+    employee_data = get_employee_data(employee_id)
+    todo_data = get_todo_data(employee_id)
+
+    display_employee_progress(employee_data, todo_data)
