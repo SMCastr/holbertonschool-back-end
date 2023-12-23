@@ -32,7 +32,6 @@ import requests
 from collections import OrderedDict
 from sys import argv
 from typing import Dict, List
-import json
 
 
 if __name__ == "__main__":
