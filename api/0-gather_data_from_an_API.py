@@ -6,8 +6,7 @@ Requirements:
 The script must display on the standard output the employee (Todo)
 list progress in this exact format:
 First line:
-Employee EMPLOYEE_NAME is done with task
-(NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
+Employee EMPLOYEE_NAME is done with tasks (NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
     EMPLOYEE_NAME: name of the employee
     NUMBER_OF_DONE_TASKS: number of completed tasks
     TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the
@@ -66,7 +65,7 @@ if __name__ == "__main__":
 
                 for idx, todo in enumerate(todos, start=1):
                     if todo["completed"]:
-                        print("\t {}. {}".format(idx, todo["title"]))
+                        print("\t{}. {}".format(idx, todo["title"]))
             else:
                 print("Employee {} has no tasks.".format(employee_name))
         else:
