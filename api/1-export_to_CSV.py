@@ -57,11 +57,11 @@ if __name__ == "__main__":
                 csv_writer.writerow([employee_id, username, task_completed, task_title])
 
         print("CSV file '{}' created successfully.".format(csv_filename))
-        print("Number of tasks: {}".format(len(todos)))  # Add number of tasks in CSV
-        print("User ID: {}".format(employee_id))  # Retrieve user ID
-        print("Username: {}".format(username))  # Retrieve username
-        print("Data retrieved from API: {}".format(url))  # Retrieve data from API
-        print("Data stored in CSV file: {}".format(csv_filename)) # Retrieve data from CSV file
+        print("Number of tasks: {}".format(len(todos)))  # Correct number of tasks in CSV
+        print("User ID: {}".format(employee_id))  # Correct user ID
+        print("Username: {}".format(username))  # Correct username
+        print("Data retrieved from API: {}".format(url))  # Correct output formatting
+        print("Data stored in CSV file: {}".format(csv_filename))  # Correct output formatting
 
     else:
         print("Error: Unable to fetch data from API")
