@@ -61,5 +61,9 @@ if __name__ == "__main__":
         print("User ID: {}".format(employee_id))  # Retrieve user ID
         print("Username: {}".format(username))  # Retrieve username
         print("Data retrieved from API: {}".format(url))  # Retrieve data from API
+        print("Data stored in CSV file: {}".format(csv_filename)) # Retrieve data from CSV file
+
     else:
         print("Error: Unable to fetch data from API")
+        print("Status code: {}".format(response.status_code))
+        print("Reason: {}".format(response.reason))
